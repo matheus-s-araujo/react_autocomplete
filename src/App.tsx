@@ -15,13 +15,16 @@ export const App: React.FC = () => {
   return (
     <div className="container">
       <main className="section is-flex is-flex-direction-column">
-        <h1 className="title" data-cy="title">
-          {selectedPerson ? (
-            `${selectedPerson.name} (${selectedPerson.born} - ${selectedPerson.died})`
-          ) : (
-            <p>No selected person</p>
-          )}
-        </h1>
+        {selectedPerson ? (
+          <h1 className="title" data-cy="title">
+            {selectedPerson.name} ({selectedPerson.born} - {selectedPerson.died}
+            )
+          </h1>
+        ) : (
+          <h1 className="title" data-cy="title">
+            No selected person
+          </h1>
+        )}
 
         <Autocomplete
           delay={delay}
