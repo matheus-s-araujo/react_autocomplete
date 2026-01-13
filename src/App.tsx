@@ -6,7 +6,7 @@ import { Person } from './types/Person';
 
 export const App: React.FC = () => {
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
-  const delay: number = 300;
+  const delay: number = 0;
 
   const onSelected = (person: Person | null) => {
     setSelectedPerson(person);

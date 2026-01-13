@@ -9,7 +9,7 @@ type Props = {
   onSelected: (person: Person | null) => void;
 };
 
-function Autocomplete({ delay, people, onSelected }: Props) {
+function Autocomplete({ delay = 300, people, onSelected }: Props) {
   const [filteredPeople, setFilteredPeople] = useState(people);
   const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState('');
@@ -17,14 +17,16 @@ function Autocomplete({ delay, people, onSelected }: Props) {
   const timeOutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+
     if (timeOutRef.current) {
       clearTimeout(timeOutRef.current);
     }
 
     timeOutRef.current = setTimeout(() => {
-      setQuery(event.target.value.trim());
+      setQuery(value.trim());
     }, delay);
-    setInputValue(event.target.value);
+    setInputValue(value);
     onSelected(null);
   };
 
@@ -38,7 +40,7 @@ function Autocomplete({ delay, people, onSelected }: Props) {
     } else {
       setFilteredPeople(people);
     }
-  }, [query]);
+  }, [query, people]);
 
   return (
     <div
